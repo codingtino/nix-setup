@@ -24,23 +24,12 @@ in
 
   environment.systemPackages = with pkgs; [
     ## unstable
-    unstablePkgs.yt-dlp
-    unstablePkgs.get_iplayer
     unstablePkgs.colmena
 
     ## stable CLI
     pkgs.comma
-    pkgs.hcloud
-    pkgs.just
     pkgs.lima
     pkgs.nix
-  ];
-
-  fonts.packages = [
-    pkgs.nerd-fonts.fira-code
-    pkgs.nerd-fonts.fira-mono
-    pkgs.nerd-fonts.hack
-    pkgs.nerd-fonts.jetbrains-mono
   ];
 
   # pins to stable as unstable updates very often
@@ -57,12 +46,6 @@ in
 
   programs.nix-index.enable = true;
 
-#  programs.zsh = {
-#    enable = true;
-#    enableCompletion = true;
-#    promptInit = builtins.readFile ./../../data/mac-dot-zshrc;
-#  };
-
   homebrew = {
     enable = true;
     onActivation = {
@@ -74,10 +57,8 @@ in
 
     brews = [
       "bitwarden-cli"
-      #"borders"
     ];
     taps = [
-      #"FelixKratz/formulae" #sketchybar
     ];
     casks = [
       "bambu-studio"
@@ -88,7 +69,6 @@ in
       "shortcat"
       "visual-studio-code"
       "vlc"
-
     ];
     masApps = {
       "Bitwarden" = 1352778147;
@@ -152,7 +132,7 @@ in
         static-only = false;
         show-recents = false;
         show-process-indicators = true;
-        orientation = "left";
+        orientation = "bottom";
         tilesize = 36;
         minimize-to-application = true;
         mineffect = "scale";
