@@ -34,4 +34,8 @@ nix build --extra-experimental-features 'nix-command flakes' ~/.config#darwinCon
 sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/.config/nix-darwin
 ```
 
+## build & switch nix
+```
+sudo --preserve-env=HOME nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake ~/.config
+```
 
