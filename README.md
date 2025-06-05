@@ -31,13 +31,13 @@ sh <(curl -L https://nixos.org/nix/install) --yes
 
 ## run git via nix to download nix-setup
 ```
-nix run --extra-experimental-features nix-command --extra-experimental-features flakes nixpkgs#git clone https://github.com/codingtino/nix-setup.git ~/.config
+nix run --extra-experimental-features nix-command --extra-experimental-features flakes nixpkgs#git clone https://github.com/codingtino/nix-setup.git ~/.config/nix
 ```
 
 ## build nix
 ```
-#nix build --extra-experimental-features 'nix-command flakes' ~/.config#darwinConfigurations.$(hostname -s).system
-nix build --extra-experimental-features 'nix-command flakes' ~/.config#darwinConfigurations.$(hostname -s).system#ggeg-test
+#nix build --extra-experimental-features 'nix-command flakes' ~/.config/nix#darwinConfigurations.$(hostname -s).system
+nix build --extra-experimental-features 'nix-command flakes' ~/.config/nix#darwinConfigurations.$(hostname -s).system#ggeg-test
 ```
 
 ## switch nix
