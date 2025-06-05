@@ -62,12 +62,15 @@ in
     ];
     casks = [
       "bambu-studio"
+      "chatgpt"
       "discord"
       "firefox"
       "ghostty"
+      "hammerspoon"
+      "hyperkey"
       "mqtt-explorer"
+      "rectangle"
       "shortcat"
-      "visual-studio-code"
       "vlc"
     ];
     masApps = {

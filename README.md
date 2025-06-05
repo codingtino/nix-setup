@@ -37,7 +37,7 @@ nix run --extra-experimental-features nix-command --extra-experimental-features 
 ## build nix
 ```
 #nix build --extra-experimental-features 'nix-command flakes' ~/.config/nix#darwinConfigurations.$(hostname -s).system
-nix build --extra-experimental-features 'nix-command flakes' ~/.config/nix#darwinConfigurations.$(hostname -s).system#ggeg-test
+nix build --extra-experimental-features 'nix-command flakes' ~/.config/nix#darwinConfigurations.#ggeg-test.system
 ```
 
 ## switch nix
@@ -47,6 +47,6 @@ sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/.config/nix-darw
 
 ## build & switch nix
 ```
-sudo --preserve-env=HOME nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake ~/.config
+sudo --preserve-env=HOME nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake ~/.config/nix#ggeg-test
 ```
 

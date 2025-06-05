@@ -9,6 +9,17 @@
     nix-direnv.enable = true;
   };
 
+  programs.vscode = {
+    enable = true;
+    profiles.default = {
+      userSettings = {
+        "prettier.prettierPath" =
+          "${pkgs.vscode-extensions.esbenp.prettier-vscode}/share/vscode/extensions/esbenp.prettier-vscode/node_modules/prettier";
+      };
+    };
+  };
+
+
   programs.eza = {
     enable = true;
     enableZshIntegration = true;
