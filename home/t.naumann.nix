@@ -1,6 +1,6 @@
 { config, inputs, pkgs, lib, unstablePkgs, ... }:
 {
-  home.stateVersion = "25.11";
+  home.stateVersion = "25.05";
 
   programs.gpg.enable = true;
 
@@ -31,25 +31,11 @@
     ];
   };
 
-#  programs.git = {
-#    enable = true;
-#    userEmail = "alexktz@gmail.com";
-#    userName = "Alex Kretzschmar";
-#    diff-so-fancy.enable = true;
-#    lfs.enable = true;
-#    extraConfig = {
-#      init = {
-#        defaultBranch = "main";
-#      };
-#      merge = {
-#        conflictStyle = "diff3";
-#        tool = "meld";
-#      };
-#      pull = {
-#        rebase = true;
-#      };
-#    };
-#  };
+  programs.git = {
+    enable = true;
+    userEmail = "172442418+codingtino@users.noreply.github.com";
+    userName = "Tino Naumann";
+  };
 
   programs.htop = {
     enable = true;
