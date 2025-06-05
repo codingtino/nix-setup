@@ -6,40 +6,23 @@ in
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     nixpkgs-unstable.legacyPackages.${pkgs.system}.beszel
-    nixpkgs-unstable.legacyPackages.${pkgs.system}.talosctl
 
     ## stable
     btop
-    coreutils
-    diffr # Modern Unix `diff`
-    difftastic # Modern Unix `diff`
-    drill
-    du-dust # Modern Unix `du`
-    dua # Modern Unix `du`
-    duf # Modern Unix `df`
-    entr # Modern Unix `watch`
+    cmatrix
     fastfetch
-    fd
-    figurine
-    gh
-    git-crypt
-    gnused
+    fzf
+    git
     hugo
-    iperf3
-    ipmitool
-    jetbrains-mono # font
     kubectl
-    mc
-    mosh
-    nmap
+    mkalias
+    neovim
     qemu
-    ripgrep
-    smartmontools
+    tmux
     tree
     unzip
     watch
     wget
-    wireguard-tools
 
     # requires nixpkgs.config.allowUnfree = true;
     vscode-extensions.ms-vscode-remote.remote-ssh
