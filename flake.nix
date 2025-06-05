@@ -35,7 +35,7 @@
     in {
 
       darwinConfigurations = {
-        GGEG-MBA-C02FG1C3Q6L5-DE = libx.mkDarwin { hostname = "ggeg-test"; };
+        ggeg-test = libx.mkDarwin { hostname = "GGEG-MBA-C02FG1C3Q6L5-DE"; };
       };
 
       colmena = {
