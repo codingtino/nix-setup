@@ -1,5 +1,10 @@
 # nix-setup
 
+## allow Terminal full disk access
+```
+open "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
+```
+
 ## install xcode
 ```
 while ! xcode-select -p &>/dev/null; do
