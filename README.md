@@ -9,6 +9,11 @@ while ! xcode-select -p &>/dev/null; do
 done
 ```
 
+## install rosetta
+```
+/usr/sbin/softwareupdate --install-rosetta --agree-to-license || true
+```
+
 ## install nix
 ```
 sh <(curl -L https://nixos.org/nix/install) --yes
