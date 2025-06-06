@@ -141,9 +141,9 @@
   };
 
   home.activation.unpackTestApp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        mkdir -p "$HOME/Applications"
-        unzip -o "$HOME/Applications/testapp.app.zip" -d "$HOME/Applications"
-    #    rm "$HOME/Applications/testapp.app.zip"
+    mkdir -p "$HOME/Applications"
+    ${pkgs.unzip}/bin/unzip -o "$HOME/Applications/testapp.app.zip" -d "$HOME/Applications"
+    rm "$HOME/Applications/testapp.app.zip"
   '';
 
   programs.neovim = {
