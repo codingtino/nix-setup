@@ -1,4 +1,11 @@
-{ config, inputs, pkgs, lib, unstablePkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  lib,
+  unstablePkgs,
+  ...
+}:
 {
   home.stateVersion = "25.05";
 
@@ -12,23 +19,53 @@
   programs.vscode = {
     enable = true;
     profiles.default = {
-      extensions = with pkgs.vscode-extensions; [
-        esbenp.prettier-vscode
-        ms-azuretools.vscode-docker
-        mechatroner.rainbow-csv
-        ms-vscode-remote.remote-ssh
-      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "chatgpt";
-          publisher = "openai";
-          version = "0.1.1741291060"; # Use the latest version you want
-          sha256 = "N5MJKY0DTLCLHPaVB/k6o1j8ev7Z4VNOfYC6NU9g9RE="; # Replace if version changes
-        }
-      ];
+      extensions =
+        with pkgs.vscode-extensions;
+        [
+          bbenoist.nix
+          brettm12345.nixfmt-vscode
+          editorconfig.editorconfig
+          esbenp.prettier-vscode
+          mechatroner.rainbow-csv
+          ms-azuretools.vscode-docker
+          ms-vscode-remote.remote-ssh
+        ]
+        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            name = "chatgpt";
+            publisher = "openai";
+            version = "0.1.1741291060"; # Use the latest version you want
+            sha256 = "N5MJKY0DTLCLHPaVB/k6o1j8ev7Z4VNOfYC6NU9g9RE="; # Replace if version changes
+          }
+        ];
 
       userSettings = {
+        "shfmt.binaryPath" = "${pkgs.shfmt}/bin/shfmt";
+        "editor.formatOnSave" = true;
+        "editor.tabSize" = 2;
+        "editor.tabCompletion" = "on";
+        "nix.formatterPath" = "${pkgs.nixfmt}/bin/nixfmt";
         "prettier.prettierPath" =
           "${pkgs.vscode-extensions.esbenp.prettier-vscode}/share/vscode/extensions/esbenp.prettier-vscode/node_modules/prettier";
+        "[shellscript]" = {
+          "editor.defaultFormatter" = "mvdan.sh";
+        };
+        "[javascript]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "[typescript]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "[json]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "[html]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "[yaml].editor.defaultFormatter" = "esbenp.prettier-vscode";
+        "[nix]" = {
+          "editor.defaultFormatter" = "brettm12345.nixfmt-vscode";
+        };
       };
     };
   };
@@ -50,9 +87,7 @@
     enableBashIntegration = true;
     enableZshIntegration = true;
     tmux.enableShellIntegration = true;
-    defaultOptions = [
-      "--no-mouse"
-    ];
+    defaultOptions = [ "--no-mouse" ];
   };
 
   programs.git = {
