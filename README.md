@@ -44,7 +44,7 @@ nix run --extra-experimental-features nix-command --extra-experimental-features 
 
 ```
 #nix build --extra-experimental-features 'nix-command flakes' ~/.config/nix#darwinConfigurations.$(hostname -s).system
-nix build --extra-experimental-features 'nix-command flakes' ~/.config/nix#darwinConfigurations.#ggeg-test.system
+nix build --extra-experimental-features 'nix-command flakes' ~/.config/nix#darwinConfigurations.ggeg-test.system
 ```
 
 ## switch nix
