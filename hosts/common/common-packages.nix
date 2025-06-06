@@ -1,4 +1,9 @@
-{ inputs, pkgs, unstablePkgs, ... }:
+{
+  inputs,
+  pkgs,
+  unstablePkgs,
+  ...
+}:
 let
   inherit (inputs) nixpkgs nixpkgs-unstable;
 in
@@ -17,8 +22,10 @@ in
     kubectl
     mkalias
     neovim
+    nixfmt-rfc-style
     nodePackages.prettier
     qemu
+    shfmt
     tmux
     tree
     unzip
@@ -26,6 +33,6 @@ in
     wget
 
     # requires nixpkgs.config.allowUnfree = true;
-#    vscode-extensions.ms-vscode-remote.remote-ssh
+    #    vscode-extensions.ms-vscode-remote.remote-ssh
   ];
 }
