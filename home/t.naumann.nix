@@ -44,6 +44,7 @@
         "editor.formatOnSave" = true;
         "editor.tabSize" = 2;
         "editor.tabCompletion" = "on";
+        "git.confirmSync" = false;
         "nix.formatterPath" = "${pkgs.nixfmt}/bin/nixfmt";
         "prettier.prettierPath" =
           "${pkgs.vscode-extensions.esbenp.prettier-vscode}/share/vscode/extensions/esbenp.prettier-vscode/node_modules/prettier";
