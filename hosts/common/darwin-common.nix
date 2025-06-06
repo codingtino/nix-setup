@@ -49,8 +49,8 @@ in
   homebrew = {
     enable = true;
     onActivation = {
-      cleanup = "zap";
-      autoUpdate = true;
+      cleanup = "zap";   # causes "Error: Refusing to untap homebrew/cask because it contains the following installed formulae or casks:"
+      autoUpdate = true; # causes "/nix/store/kak261i735wlj8zpng9spq2fmw96qxly-source/.git: Permission denied"
       upgrade = true;
     };
     global.autoUpdate = true;
