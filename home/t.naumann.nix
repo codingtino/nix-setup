@@ -133,8 +133,18 @@
   programs.alacritty.enable = true;
 
   programs.bat.enable = true;
-  programs.bat.config.theme = "Nord";
-  #programs.zsh.shellAliases.cat = "${pkgs.bat}/bin/bat";
+  programs.bat.config.theme = "Visual Studio Dark+";
+  programs.zsh.shellAliases.cat = "${pkgs.bat}/bin/bat";
+
+  home.file."Applications/testapp.app.zip" = {
+    source = inputs.self + "/assets/webapps/testapp.app.zip";
+  };
+
+  home.activation.unpackTestApp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        mkdir -p "$HOME/Applications"
+        unzip -o "$HOME/Applications/testapp.app.zip" -d "$HOME/Applications"
+    #    rm "$HOME/Applications/testapp.app.zip"
+  '';
 
   programs.neovim = {
     enable = true;
