@@ -131,8 +131,8 @@ in
       # When performing a search, search the current folder by default
       FXDefaultSearchScope = "SCcf";
       DisableAllAnimations = true;
-      NewWindowTarget = "PfDe";
-      NewWindowTargetPath = "file://$\{HOME\}/Desktop/";
+      NewWindowTarget = "PfHm";
+      NewWindowTargetPath = "file://$\{HOME\}";
       AppleShowAllExtensions = true;
       FXEnableExtensionChangeWarning = false;
       ShowStatusBar = true;
@@ -191,10 +191,10 @@ in
       PMPrintingExpandedStateForPrint2 = true;
     };
     "com.knollsoft.Hyperkey" = {
-      SUEnableAutomaticChecks = true;
+      SUEnableAutomaticChecks = false;
       SUHasLaunchedBefore = true;
       launchOnLogin = true;
-      hideMenuBarIcon = true;
+      hideMenuBarIcon = false;
       executeQuickHyperKey = true;
       keyRemap = 1;
       capsLockRemapped = 2;
@@ -202,7 +202,12 @@ in
       physicalKeycode = 57;
       quickHyperKeycode = 53;
     };
-
+    "org.hammerspoon.Hammerspoon" = {
+      HSUploadCrashData = false;
+      "NSWindow Frame prefs" = "541 461 365 277 0 0 1440 875 ";
+      SUEnableAutomaticChecks = false;
+      SUHasLaunchedBefore = true;
+    };
   };
 
 }
