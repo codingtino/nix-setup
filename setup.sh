@@ -1,22 +1,11 @@
-# nix-setup
+#!/bin/bash
 
-## allow Terminal full disk access
 
-```
 open "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
-```
+echo "⚠️  Please enable Full Disk Access for Terminal.app, then press Enter to continue..."
+read -r
 
-## install xcode
-
-```
-while ! xcode-select -p &>/dev/null; do
-    xcode-select --install &>/dev/null
-    echo "Waiting for Xcode installation to complete..."
-    sleep 10
-done
-```
-```
-# Check if Command Line Tools are installed
+# install Command Line Tools
 if ! xcode-select -p &>/dev/null; then
     echo "Installing Command Line Tools..."
     touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
@@ -32,47 +21,21 @@ if ! xcode-select -p &>/dev/null; then
 else
     echo "Command Line Tools already installed."
 fi
-```
 
 ## install rosetta
-
-```
 /usr/sbin/softwareupdate --install-rosetta --agree-to-license || true
-```
 
 ## install nix
-
-```
 sh <(curl -L https://nixos.org/nix/install) --yes
-```
 
 ## enable nix in current shell
-
-```
 . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-```
 
 ## run git via nix to download nix-setup
-
-```
-nix run --extra-experimental-features 'nix-command flakes' nixpkgs#git clone https://github.com/codingtino/nix-setup.git ~/.config/nix
-```
+git clone https://github.com/codingtino/nix-setup.git ~/.config/nix
 
 ## build nix
-
-```
-#nix build --extra-experimental-features 'nix-command flakes' ~/.config/nix#darwinConfigurations.$(hostname -s).system
 nix build --extra-experimental-features 'nix-command flakes' ~/.config/nix#darwinConfigurations.ggeg-test.system
-```
 
 ## switch nix
-
-```
-sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/.config/nix#ggeg-test
-```
-
-## build & switch nix
-
-```
-sudo --preserve-env=HOME nix run nix-darwin --extra-experimental-features 'nix-command flakes' -- switch --flake ~/.config/nix#ggeg-test
-```
+sudo ./result/sw/bin/darwin-rebuild switch --flake ~/.config/nix#ggeg-test

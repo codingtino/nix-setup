@@ -11,33 +11,29 @@
 
   programs.gpg.enable = true;
 
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
 
   programs.vscode = {
     enable = true;
     profiles.default = {
-      # extensions =
-      #   with pkgs.vscode-extensions;
-      #   [
-      #     bbenoist.nix
-      #     brettm12345.nixfmt-vscode
-      #     editorconfig.editorconfig
-      #     esbenp.prettier-vscode
-      #     mechatroner.rainbow-csv
-      #     ms-azuretools.vscode-docker
-      #     ms-vscode-remote.remote-ssh
-      #   ]
-      #   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      #     {
-      #       name = "chatgpt";
-      #       publisher = "openai";
-      #       version = "0.1.1741291060"; # Use the latest version you want
-      #       sha256 = "N5MJKY0DTLCLHPaVB/k6o1j8ev7Z4VNOfYC6NU9g9RE="; # Replace if version changes
-      #     }
-      #   ];
+       extensions =
+         with pkgs.vscode-extensions;
+         [
+           bbenoist.nix
+           brettm12345.nixfmt-vscode
+           editorconfig.editorconfig
+           esbenp.prettier-vscode
+           mechatroner.rainbow-csv
+           ms-azuretools.vscode-docker
+           ms-vscode-remote.remote-ssh
+         ]
+         ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+           {
+             name = "chatgpt";
+             publisher = "openai";
+             version = "0.1.1741291060"; # Use the latest version you want
+             sha256 = "N5MJKY0DTLCLHPaVB/k6o1j8ev7Z4VNOfYC6NU9g9RE="; # Replace if version changes
+           }
+         ];
 
       userSettings = {
         "shfmt.binaryPath" = "${pkgs.shfmt}/bin/shfmt";
@@ -73,100 +69,43 @@
     };
   };
 
-  programs.eza = {
-    enable = true;
-    enableZshIntegration = true;
-    icons = "auto";
-    git = true;
-    extraOptions = [
-      "--group-directories-first"
-      "--header"
-      "--color=auto"
-    ];
-  };
-
-  programs.fzf = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-    tmux.enableShellIntegration = true;
-    defaultOptions = [ "--no-mouse" ];
-  };
-
   programs.git = {
     enable = true;
     userEmail = "172442418+codingtino@users.noreply.github.com";
     userName = "Tino Naumann";
   };
 
-  programs.htop = {
-    enable = true;
-    settings.show_program_path = true;
-  };
-
-  programs.lf.enable = true;
-
-  programs.bash.enable = true;
-
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    #initExtra = (builtins.readFile ../mac-dot-zshrc);
-  };
-
-  programs.tmux = {
-    enable = true;
-    #keyMode = "vi";
-    clock24 = true;
-    historyLimit = 10000;
-    plugins = with pkgs.tmuxPlugins; [
-      gruvbox
-      vim-tmux-navigator
-    ];
-    extraConfig = ''
-      new-session -s main
-      bind-key -n C-a send-prefix
-    '';
-  };
-
   programs.home-manager.enable = true;
   programs.nix-index.enable = true;
-
-  programs.alacritty.enable = true;
 
   programs.bat.enable = true;
   programs.bat.config.theme = "Visual Studio Dark+";
   programs.zsh.shellAliases.cat = "${pkgs.bat}/bin/bat";
 
-  home.file."Applications/testapp.app.zip" = {
-    source = inputs.self + "/assets/webapps/testapp.app.zip";
-  };
+#  home.activation.unpackTestApp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+#    APP_DIR="$HOME/Applications"
+#    WEB_APPS=(
+#      "test-google,https://google.com"
+#      "next-test,https://bing.com"
+#    )
+#    mkdir -p "$APP_DIR"
+#    for entry in "''${WEB_APPS[@]}"; do
+#      APP_NAME="''${entry%%,*}"
+#      APP_URL="''${entry#*,}"
+#      APP_PATH="$APP_DIR/$APP_NAME.app"
 
-  home.activation.unpackTestApp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    APP_DIR="$HOME/Applications"
-    WEB_APPS=(
-      "test-google,https://google.com"
-      "next-test,https://bing.com"
-    )
-    mkdir -p "$APP_DIR"
-    for entry in "''${WEB_APPS[@]}"; do
-      APP_NAME="''${entry%%,*}"
-      APP_URL="''${entry#*,}"
-      APP_PATH="$APP_DIR/$APP_NAME.app"
-
-      if [ ! -d "$APP_PATH" ]; then
-        nix shell nixpkgs#nodejs --command sh -c '
-          export "PATH=/usr/bin:$PATH"
-          npx --yes nativefier --no-progress --name "'"$APP_NAME"'" "'"$APP_URL"'"  >/dev/null 2>&1
-          mv "'"$HOME/''\${APP_NAME}-darwin-arm64/$APP_NAME.app"'" "'"$APP_DIR/"'"
-          rm -rf "'"$HOME/''\${APP_NAME}-darwin-arm64/"'"'
-          echo "✅ $APP_NAME.app installed."
-      else
-        echo "✅ $APP_NAME.app already exists."
-      fi
-    done
-  '';
+#      if [ ! -d "$APP_PATH" ]; then
+#        nix shell nixpkgs#nodejs --command sh -c '
+#          export "PATH=/usr/bin:$PATH"
+#          npx --yes nativefier --no-progress --name "'"$APP_NAME"'" "'"$APP_URL"'"  >/dev/null 2>&1
+#          mv "'"$HOME/''\${APP_NAME}-darwin-arm64/$APP_NAME.app"'" "'"$APP_DIR/"'"
+#          rm -rf "'"$HOME/''\${APP_NAME}-darwin-arm64/"'"'
+#          echo "✅ $APP_NAME.app installed."
+#      else
+#        echo "✅ $APP_NAME.app already exists."
+#      fi
+#    done
+#  '';
 
   home.file.".hammerspoon/init.lua".text = ''
      -- Define the Hyper key combination
@@ -305,5 +244,5 @@
   #   '';
   #  };
 
-  programs.zoxide.enable = true;
+#  programs.zoxide.enable = true;
 }
