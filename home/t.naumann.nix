@@ -11,6 +11,20 @@
 
   programs.gpg.enable = true;
 
+  home.file."Library/Application Support/Code/User/globalStorage/storage.json" = {
+      text = '''';
+      executable = false;
+  };
+  home.file."Library/Application Support/test123/asd.txt" = {
+      text = '''';
+  };
+
+
+#  home.file."/Users/t.naumann/Library/Application Support/Code/User/globalStorage/storage.json" = {
+#    enable = true;
+#    source = "/Users/t.naumann/Library/Application Support/Code/User/globalStorage";
+#    recursive = true;
+#  };
 
   programs.vscode = {
     enable = true;
