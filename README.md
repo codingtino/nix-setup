@@ -50,7 +50,7 @@ nix build --extra-experimental-features 'nix-command flakes' ~/.config/nix#darwi
 ## switch nix
 
 ```
-sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/.config/nix-darwin
+sudo /run/current-system/sw/bin/darwin-rebuild switch --flake ~/.config/nix#ggeg-test
 ```
 
 ## build & switch nix

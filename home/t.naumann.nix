@@ -138,15 +138,40 @@
   programs.bat.config.theme = "Visual Studio Dark+";
   programs.zsh.shellAliases.cat = "${pkgs.bat}/bin/bat";
 
-#  home.file."Applications/testapp.app.zip" = {
-#    source = inputs.self + "/assets/webapps/testapp.app.zip";
-#  };
+  #  home.file."Applications/testapp.app.zip" = {
+  #    source = inputs.self + "/assets/webapps/testapp.app.zip";
+  #  };
 
-#  home.activation.unpackTestApp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-#    mkdir -p "$HOME/Applications"
-#    ${pkgs.unzip}/bin/unzip -o "$HOME/Applications/testapp.app.zip" -d "$HOME/Applications"
-#    rm "$HOME/Applications/testapp.app.zip"
-#  '';
+  home.activation.unpackTestApp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    APP_DIR="$HOME/Applications"
+    WEB_APPS=(
+      "test-google,https://google.com"
+      "next-test,https://bing.com"
+    )
+    mkdir -p "$APP_DIR"
+    for entry in "''${WEB_APPS[@]}"; do
+      APP_NAME="''${entry%%,*}"
+      APP_URL="''${entry#*,}"
+      APP_PATH="$APP_DIR/$APP_NAME.app"
+
+      if [ ! -d "$APP_PATH" ]; then
+        nix shell nixpkgs#nodejs --command sh -c '
+          export "PATH=/usr/bin:$PATH"
+          npx --yes nativefier --no-progress --name "'"$APP_NAME"'" "'"$APP_URL"'"  >/dev/null 2>&1
+          mv "'"$HOME/''\${APP_NAME}-darwin-arm64/$APP_NAME.app"'" "'"$APP_DIR/"'"
+          rm -rf "'"$HOME/''\${APP_NAME}-darwin-arm64/"'"'
+          echo "✅ $APP_NAME.app installed."
+      else
+        echo "✅ $APP_NAME.app already exists."
+      fi
+    done
+  '';
+
+  #  home.activation.unpackTestApp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  #    mkdir -p "$HOME/Applications"
+  #    ${pkgs.unzip}/bin/unzip -o "$HOME/Applications/testapp.app.zip" -d "$HOME/Applications"
+  #    rm "$HOME/Applications/testapp.app.zip"
+  #  '';
 
   programs.neovim = {
     enable = true;
