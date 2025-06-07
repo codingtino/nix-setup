@@ -45,6 +45,7 @@
         "editor.tabSize" = 2;
         "editor.tabCompletion" = "on";
         "git.confirmSync" = false;
+        "git.autofetch" = true;
         "git.enableSmartCommit" = true;
         "nix.formatterPath" = "${pkgs.nixfmt}/bin/nixfmt";
         "prettier.prettierPath" =
