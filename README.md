@@ -37,7 +37,7 @@ sh <(curl -L https://nixos.org/nix/install) --yes
 ## run git via nix to download nix-setup
 
 ```
-nix run --extra-experimental-features nix-command --extra-experimental-features flakes nixpkgs#git clone https://github.com/codingtino/nix-setup.git ~/.config/nix
+nix run --extra-experimental-features 'nix-command flakes' nixpkgs#git clone https://github.com/codingtino/nix-setup.git ~/.config/nix
 ```
 
 ## build nix
