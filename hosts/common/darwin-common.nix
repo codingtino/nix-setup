@@ -83,7 +83,6 @@ in
       "hammerspoon"
       "hyperkey"
       "mqtt-explorer"
-      "rectangle"
       "shortcat"
       "vlc"
     ];

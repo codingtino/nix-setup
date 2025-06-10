@@ -15,12 +15,6 @@
     text = '''';
   };
 
-  #  home.file."/Users/t.naumann/Library/Application Support/Code/User/globalStorage/storage.json" = {
-  #    enable = true;
-  #    source = "/Users/t.naumann/Library/Application Support/Code/User/globalStorage";
-  #    recursive = true;
-  #  };
-
   programs.vscode = {
     enable = true;
     profiles.default = {
@@ -91,6 +85,110 @@
   programs.bat.config.theme = "Visual Studio Dark+";
   programs.zsh.shellAliases.cat = "${pkgs.bat}/bin/bat";
 
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+
+    oh-my-zsh = {
+      enable = true;
+      theme = "powerlevel10k/powerlevel10k";
+      custom = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k";
+      plugins = [ "git" "z" "zsh-autosuggestions" "zsh-syntax-highlighting" ];
+    };
+  };
+  programs.zsh.initExtra = ''
+    [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+  '';
+
+  home.packages = with pkgs; [
+    zsh-powerlevel10k
+  ];
+
+  home.file.".p10k.zsh".text = ''
+    'builtin' 'local' '-a' 'p10k_config_opts'
+    [[ ! -o 'aliases'         ]] || p10k_config_opts+=('aliases')
+    [[ ! -o 'sh_glob'         ]] || p10k_config_opts+=('sh_glob')
+    [[ ! -o 'no_brace_expand' ]] || p10k_config_opts+=('no_brace_expand')
+    'builtin' 'setopt' 'no_aliases' 'no_sh_glob' 'brace_expand'
+
+    () {
+      emulate -L zsh -o extended_glob
+
+      unset -m '(POWERLEVEL9K_*|DEFAULT_USER)~POWERLEVEL9K_GITSTATUS_DIR'
+
+      [[ $ZSH_VERSION == (5.<1->*|<6->.*) ]] || return
+
+      local grey='242'
+
+      typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+      )
+
+      typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+      )
+
+
+      typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+
+      typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS}_FOREGROUND=$magenta
+      typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS}_FOREGROUND=$red
+      typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='❯'
+      typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VICMD_CONTENT_EXPANSION='❮'
+      typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIVIS_CONTENT_EXPANSION='❮'
+      typeset -g POWERLEVEL9K_PROMPT_CHAR_OVERWRITE_STATE=false
+
+      typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=$grey
+      typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
+      typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
+
+      typeset -g POWERLEVEL9K_DIR_FOREGROUND=$blue
+
+      typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE="%F{$white}%n%f%F{$grey}@%m%f"
+      typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE="%F{$grey}%n@%m%f"
+      typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_CONTENT_EXPANSION=
+
+      typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=5
+      typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=0
+      typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
+      typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=$yellow
+
+      typeset -g POWERLEVEL9K_VCS_FOREGROUND=$grey
+
+      typeset -g POWERLEVEL9K_VCS_LOADING_TEXT=
+
+      typeset -g POWERLEVEL9K_VCS_MAX_SYNC_LATENCY_SECONDS=0
+
+      typeset -g POWERLEVEL9K_VCS_{INCOMING,OUTGOING}_CHANGESFORMAT_FOREGROUND=$cyan
+      typeset -g POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind)
+      typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=
+      typeset -g POWERLEVEL9K_VCS_COMMIT_ICON='@'
+      typeset -g POWERLEVEL9K_VCS_{STAGED,UNSTAGED,UNTRACKED}_ICON=
+      typeset -g POWERLEVEL9K_VCS_DIRTY_ICON='*'
+      typeset -g POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=':⇣'
+      typeset -g POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=':⇡'
+      typeset -g POWERLEVEL9K_VCS_{COMMITS_AHEAD,COMMITS_BEHIND}_MAX_NUM=1
+      typeset -g POWERLEVEL9K_VCS_CONTENT_EXPANSION='${${${P9K_CONTENT/⇣* :⇡/⇣⇡}// }//:/ }'
+
+      typeset -g POWERLEVEL9K_TIME_FOREGROUND=$grey
+      typeset -g POWERLEVEL9K_TIME_FORMAT='%D{%H:%M:%S}'
+      typeset -g POWERLEVEL9K_TIME_UPDATE_ON_COMMAND=false
+
+      typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
+
+      typeset -g POWERLEVEL9K_INSTANT_PROMPT=verbose
+
+      typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
+
+      (( ! $+functions[p10k] )) || p10k reload
+    }
+
+    typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
+
+    'builtin' 'unset' 'p10k_config_opts'
+  '';
+
   #  home.activation.unpackTestApp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
   #    APP_DIR="$HOME/Applications"
   #    WEB_APPS=(
@@ -116,10 +214,74 @@
   #    done
   #  '';
 
+
   home.file.".hammerspoon/init.lua".text = ''
-     -- Define the Hyper key combination
+    -- Define the Hyper key combination
     local hyper = {"ctrl", "alt", "cmd", "shift"}
 
+
+    -- Remap Hyper + Down Arrow to minimize the focused window
+    hs.hotkey.bind(hyper, "down", function()
+      local win = hs.window.focusedWindow()
+      if win then
+        win:minimize()
+      end
+    end)
+
+    -- Remap Hyper + Up Arrow to maximize the focused window
+    hs.hotkey.bind(hyper, "up", function()
+      local win = hs.window.focusedWindow()
+      if win then
+        win:maximize()
+      end
+    end)
+
+    -- Remap Hyper + right Arrow to Move focused window to the next screen
+    hs.hotkey.bind(hyper, "right", function()
+      local win = hs.window.focusedWindow()
+      if win then
+        local nextScreen = win:screen():next()
+        win:moveToScreen(nextScreen)
+      end
+    end)
+
+    -- Remap Hyper + left Arrow to Move focused window to the previous screen
+    hs.hotkey.bind(hyper, "left", function()
+      local win = hs.window.focusedWindow()
+      if win then
+        local prevScreen = win:screen():previous()
+        win:moveToScreen(prevScreen)
+      end
+    end)
+
+    -- Remap Hyper + Tab to switch focused between windows of same application
+    hs.hotkey.bind(hyper, "tab", function()
+      local win = hs.window.focusedWindow()
+      if not win then return end
+      
+      local app = win:application()
+      if not app then return end
+      
+      -- Get all visible windows of the current app
+      local windows = hs.fnutils.filter(app:allWindows(), function(w)
+        return w:isStandard() and w:isVisible()
+      end)
+      
+      if #windows <= 1 then return end
+      
+      -- Sort them by window ID for consistency
+      table.sort(windows, function(a, b)
+        return a:id() < b:id()
+      end)
+      
+      -- Find current window index
+      local currentIndex = hs.fnutils.indexOf(windows, win)
+      local nextIndex = currentIndex % #windows + 1
+      
+      -- Focus the next window
+      windows[nextIndex]:focus()
+    end)
+      
     -- Open Kitty academicFive with Hyper + A
     hs.hotkey.bind(hyper, "A", function()
         hs.application.launchOrFocus("academyFIVE")
@@ -207,13 +369,8 @@
 
     -- Notify when the config is loaded
     -- hs.alert.show("Hammerspoon Config Loaded")
-  '';
+'';
 
-  #  home.activation.unpackTestApp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-  #    mkdir -p "$HOME/Applications"
-  #    ${pkgs.unzip}/bin/unzip -o "$HOME/Applications/testapp.app.zip" -d "$HOME/Applications"
-  #    rm "$HOME/Applications/testapp.app.zip"
-  #  '';
 
   # programs.neovim = {
   #   enable = true;
