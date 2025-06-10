@@ -99,15 +99,13 @@
       plugins = [ "git" "z" "zsh-autosuggestions" "zsh-syntax-highlighting" ];
     };
   };
-  programs.zsh.initExtra = ''
-    [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-  '';
 
   home.packages = with pkgs; [
     zsh-powerlevel10k
   ];
 
-  home.file.".p10k.zsh".source = .p10k.zsh;
+  home.file.".p10k.zsh".source = ./.p10k.zsh;
+  home.file.".zshrc".source = ./.zshrc;
 
   #  home.activation.unpackTestApp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
   #    APP_DIR="$HOME/Applications"
