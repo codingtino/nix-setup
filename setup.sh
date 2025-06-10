@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#ls ~/Library/Mail &>/dev/null
-touch /Library/Application\ Support/fakefile 2>/dev/null
+ls ~/Library/Mail &>/dev/null
+#touch /Library/Application\ Support/fakefile 2>/dev/null
 
 open "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
 echo "⚠️  Please enable Full Disk Access for Terminal.app, then press Enter to continue..."
