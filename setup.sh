@@ -53,16 +53,6 @@ while :; do
   fi
 done
 
-open -a Rectangle
-echo "opened Rectangle"
-echo "Press 'y' to continue..."
-while :; do
-  read -n 1 -s key # Read one character silently (no echo)
-  if [[ $key == "y" ]]; then
-    break
-  fi
-done
-
 open -a Hyperkey
 echo "opened Hyperkey"
 echo "Press 'y' to continue..."
