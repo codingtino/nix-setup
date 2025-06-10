@@ -13,10 +13,6 @@
 
   home.file."Library/Application Support/Code/User/globalStorage/storage.json" = {
     text = '''';
-    executable = false;
-  };
-  home.file."Library/Application Support/test123/asd.txt" = {
-    text = '''';
   };
 
   #  home.file."/Users/t.naumann/Library/Application Support/Code/User/globalStorage/storage.json" = {
