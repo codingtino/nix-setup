@@ -1,8 +1,12 @@
 #!/bin/bash
 
+#ls ~/Library/Mail &>/dev/null
+touch /Library/Application\ Support/fakefile 2>/dev/null
+
 open "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
 echo "⚠️  Please enable Full Disk Access for Terminal.app, then press Enter to continue..."
 read -r
+rm -rf /Library/Application\ Support/fakefile
 
 # install Command Line Tools
 if ! xcode-select -p &>/dev/null; then
@@ -16,6 +20,7 @@ if ! xcode-select -p &>/dev/null; then
     tr -d '\n')
   softwareupdate -i "$CLT" --verbose
   xcode-select --switch /Library/Developer/CommandLineTools
+  rm -rf /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
   echo "Command Line Tools installed."
 else
   echo "Command Line Tools already installed."
