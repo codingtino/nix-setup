@@ -1,5 +1,22 @@
 # nix-setup
 
+## How to use
+
+### the actual user needs to an administrator
+
+```
+bash <(curl -L s.codingtino.com/nix-setup)
+```
+
+## what it does
+
+1. installs Xcode
+2. installs Nix-Package-Manager
+3. clones this Repository to ~/.config/nix
+4. installs nix-darwin using the ~/.config/nix/flake.nix
+
+## what to do after the setup
+
 ## allow Terminal full disk access
 
 ```
@@ -15,6 +32,7 @@ while ! xcode-select -p &>/dev/null; do
     sleep 10
 done
 ```
+
 ```
 # Check if Command Line Tools are installed
 if ! xcode-select -p &>/dev/null; then
