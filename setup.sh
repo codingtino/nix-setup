@@ -1,12 +1,11 @@
 #!/bin/bash
 
+## give terminal permission
+###make sure terminal app shows in privacy-pane
 ls ~/Library/Mail &>/dev/null
-#touch /Library/Application\ Support/fakefile 2>/dev/null
-
 open "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
 echo "⚠️  Please enable Full Disk Access for Terminal.app, then press Enter to continue..."
 read -r
-rm -rf /Library/Application\ Support/fakefile
 
 # install Command Line Tools
 if ! xcode-select -p &>/dev/null; then
