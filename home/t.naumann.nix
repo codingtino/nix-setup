@@ -107,30 +107,34 @@
   home.file.".p10k.zsh".source = ./.p10k.zsh;
   home.file.".zshrc".source = ./.zshrc;
 
-  #  home.activation.unpackTestApp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-  #    APP_DIR="$HOME/Applications"
-  #    WEB_APPS=(
-  #      "test-google,https://google.com"
-  #      "next-test,https://bing.com"
-  #    )
-  #    mkdir -p "$APP_DIR"
-  #    for entry in "''${WEB_APPS[@]}"; do
-  #      APP_NAME="''${entry%%,*}"
-  #      APP_URL="''${entry#*,}"
-  #      APP_PATH="$APP_DIR/$APP_NAME.app"
+  home.activation.unpackTestApp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    APP_DIR="$HOME/Applications"
+      WEB_APPS=(
+        "academyFIVE,http://ac5-prod.macromedia.de/"
+        "Cynappt,https://cynapmgmt.mmlogin.org/"
+        "Fernwartung,https://remote.gge-germany.de/"
+        "Intune,https://intune.microsoft.com/"
+        "osTicket,https://support.gge-germany.de/scp/"
+        "YouTube,https://youtube.com/"
+      )
+      mkdir -p "$APP_DIR"
+      for entry in "''${WEB_APPS[@]}"; do
+        APP_NAME="''${entry%%,*}"
+        APP_URL="''${entry#*,}"
+        APP_PATH="$APP_DIR/$APP_NAME.app"
 
-  #      if [ ! -d "$APP_PATH" ]; then
-  #        nix shell nixpkgs#nodejs --command sh -c '
-  #          export "PATH=/usr/bin:$PATH"
-  #          npx --yes nativefier --no-progress --name "'"$APP_NAME"'" "'"$APP_URL"'"  >/dev/null 2>&1
-  #          mv "'"$HOME/''\${APP_NAME}-darwin-arm64/$APP_NAME.app"'" "'"$APP_DIR/"'"
-  #          rm -rf "'"$HOME/''\${APP_NAME}-darwin-arm64/"'"'
-  #          echo "✅ $APP_NAME.app installed."
-  #      else
-  #        echo "✅ $APP_NAME.app already exists."
-  #      fi
-  #    done
-  #  '';
+        if [ ! -d "$APP_PATH" ]; then
+          nix shell nixpkgs#nodejs --command sh -c '
+            export "PATH=/usr/bin:$PATH"
+            npx --yes nativefier --no-progress --name "'"$APP_NAME"'" "'"$APP_URL"'"  >/dev/null 2>&1
+            mv "'"$HOME/''\${APP_NAME}-darwin-arm64/$APP_NAME.app"'" "'"$APP_DIR/"'"
+            rm -rf "'"$HOME/''\${APP_NAME}-darwin-arm64/"'"'
+            echo "✅ $APP_NAME.app installed."
+        else
+          echo "✅ $APP_NAME.app already exists."
+        fi
+      done
+    '';
 
   home.file.".hammerspoon/init.lua".source = ./hammerspoon.lua;
 
