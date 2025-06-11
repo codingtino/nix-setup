@@ -111,7 +111,7 @@
     APP_DIR="$HOME/Applications"
       WEB_APPS=(
         "academyFIVE,http://ac5-prod.macromedia.de/"
-        "Cynappt,https://cynapmgmt.mmlogin.org/"
+        "Cynap,https://cynapmgmt.mmlogin.org/"
         "Fernwartung,https://remote.gge-germany.de/"
         "Intune,https://intune.microsoft.com/"
         "osTicket,https://support.gge-germany.de/scp/"

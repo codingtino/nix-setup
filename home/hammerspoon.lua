@@ -74,9 +74,9 @@
         hs.application.launchOrFocus("bambuStudio")
     end)
 
-    -- Open Cynapp with Hyper + C
+    -- Open Cynap with Hyper + C
     hs.hotkey.bind(hyper, "C", function()
-        hs.application.launchOrFocus("Cynapp")
+        hs.application.launchOrFocus("Cynap")
     end)
 
     -- Open Kitty Edge with Hyper + E
