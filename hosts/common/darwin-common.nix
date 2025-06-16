@@ -88,6 +88,9 @@ in
     ];
     masApps = {
       "Bitwarden" = 1352778147;
+      "Keka" = 470158793;
+      "Tailscale" = 1475387142;
+      "Usage - Device Monitor" = 1561788435;
     };
   };
 
