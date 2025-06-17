@@ -4,3 +4,7 @@
 - add unlock with apple watch
 - finder customization
 - enable icloud
+- safari settings
+    - don't auto extract
+    - enable bitwarden
+    - open all windows from last seassion
