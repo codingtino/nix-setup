@@ -1,0 +1,6 @@
+- change launch order in setup.sh (hammerspoon before shortcat)
+- add hammerspoon setting launch at login
+- add shortcat settings
+- add unlock with apple watch
+- finder customization
+- enable icloud
