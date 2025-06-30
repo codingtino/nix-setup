@@ -52,6 +52,12 @@
           ];
         };
 
+        # wd
+        morphnix = import ./hosts/nixos/morphnix;
+        razer = import ./hosts/nixos/razer;
+
+        # test system
+        # yeager = nixosSystem "x86_64-linux" "yeager" "alex";
       };
 
     };

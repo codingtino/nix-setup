@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# Ask for sudo password upfront
+if sudo -v; then
+  # Keep-alive: update existing `sudo` time stamp until script exits
+  while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+  done 2>/dev/null &
+else
+  echo "Failed to acquire sudo credentials. Exiting."
+  exit 1
+fi
+
 ## give terminal permission
 ###make sure terminal app shows in privacy-pane
 ls ~/Library/Mail &>/dev/null
